@@ -75,7 +75,7 @@ public class PlayerVcPswd {
      * @param uuid players uuid
      */
     private void saveToFile(String playerName, String password, UUID uuid) {
-        String key = playerName.toLowerCase();
+        String key = playerName;
         config.set(key + ".password", password);
         config.set(key + ".uuid", uuid.toString());
         try {
@@ -92,7 +92,7 @@ public class PlayerVcPswd {
      * @return whether password is set
      */
     public boolean isPasswordSet(String playerName) {
-        return playerPasswords.containsKey(playerName.toLowerCase());
+        return playerPasswords.containsKey(playerName);
     }
 
     /**
@@ -107,7 +107,7 @@ public class PlayerVcPswd {
             return;
         }
 
-        String key = player.getName().toLowerCase();
+        String key = player.getName();
 
         String hash = BCrypt.hashpw(password, BCrypt.gensalt(12));
 
@@ -125,7 +125,7 @@ public class PlayerVcPswd {
      * @return whether it is correct or not
      */
     public boolean validatePassword(String playerName, String password) {
-        String stored = playerPasswords.get(playerName.toLowerCase());
+        String stored = playerPasswords.get(playerName);
         if (stored == null) return false; // no password set
 
         try {
@@ -152,7 +152,7 @@ public class PlayerVcPswd {
      * @return the Players uuid
      */
     public UUID getStoredUUID(String playerName) {
-        String uuidStr = config.getString(playerName.toLowerCase() + ".uuid");
+        String uuidStr = config.getString(playerName + ".uuid");
         if (uuidStr != null) {
             try {
                 return UUID.fromString(uuidStr);
@@ -169,7 +169,7 @@ public class PlayerVcPswd {
      * @return whether uuid is linked for player
      */
     public boolean isUUIDLinked(String playerName) {
-        return playerUUIDs.containsKey(playerName.toLowerCase());
+        return playerUUIDs.containsKey(playerName);
     }
 
     /**
