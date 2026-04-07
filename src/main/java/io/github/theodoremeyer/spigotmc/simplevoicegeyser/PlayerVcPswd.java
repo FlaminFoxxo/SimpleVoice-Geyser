@@ -55,12 +55,12 @@ public class PlayerVcPswd {
             String password = config.getString(key + ".password");
             String uuidStr = config.getString(key + ".uuid");
             if (password != null) {
-                playerPasswords.put(key.toLowerCase(), password);
+                playerPasswords.put(key, password);
             }
             if (uuidStr != null) {
                 try {
                     UUID uuid = UUID.fromString(uuidStr);
-                    playerUUIDs.put(key.toLowerCase(), uuid);
+                    playerUUIDs.put(key, uuid);
                 } catch (IllegalArgumentException e) {
                     SVGPlugin.log().warning("[PlayerData] Invalid UUID for player " + key);
                 }
